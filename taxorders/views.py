@@ -1,5 +1,5 @@
 # taxorders/views.py
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from .models import TaxOrder, CertificateConsumption
 from .forms import CertificateForm, ConsumptionForm
@@ -59,4 +59,5 @@ def enter_consumption(request, tax_order_id):
 @login_required
 def tax_order_detail(request, tax_order_id):
     tax_order = get_object_or_404(TaxOrder, pk=tax_order_id)
-    return render(request, 'taxorders/tax_order_detail.html', {'tax_order': tax_order})
+    tax_order_cons = get_list_or_404(CertificateConsumption, tax_order=tax_order.id)
+    return render(request, 'taxorders/tax_order_detail.html', {'tax_order': tax_order,'tax_order_cons': tax_order_cons})

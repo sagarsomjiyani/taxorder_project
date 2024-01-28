@@ -18,6 +18,28 @@
         <p>Consumed: {{ tax_order.consumed }}</p>
         <p>Balance: {{ tax_order.balance }}</p>
       </div>
+      <div class="col-md-6">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Entered By</th>
+              <th>Document Number</th>
+              <th>Amount</th>
+              <!-- Add other headers as needed -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for tax_order_con in tax_order_cons %}
+              <tr>
+                <td>{{ tax_order_con.user }}</td>
+                <td>{{ tax_order_con.document_number }}</td>
+                <td>{{ tax_order_con.consumption_amount }}</td>
+                <!-- Add other fields as needed -->
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>  
+      </div>
     </div>
     
     <a href="{% url 'enter_consumption' tax_order.id %}" class="btn btn-primary mt-2">Enter Consumption</a>
