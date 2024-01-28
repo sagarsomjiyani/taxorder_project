@@ -1,0 +1,13 @@
+<!-- taxorders/templates/taxorders/add_certificate.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Add Certificate</h2>
+    <form method="post" action="{% url 'add_certificate' %}" class="col-md-6">
+      {% csrf_token %}
+      {{form}}
+      <button type="submit" class="btn btn-primary">Add Certificate</button>
+    </form>
+  </div>
+{% endblock %}

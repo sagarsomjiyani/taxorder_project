@@ -1,0 +1,57 @@
+<!-- taxorders/templates/taxorders/tax_order_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="mt-4">Tax Order List</h2>
+  
+  <form method="get" action="{% url 'tax_order_list' %}" class="form-inline mb-4">
+    <div class="form-group">
+      <label for="company_code_filter" class="mr-2">Company Code:</label>
+      <input type="text" name="company_code_filter" class="form-control" value="{{ request.GET.company_code_filter }}">
+    </div>
+    <div class="form-group">
+      <label for="contract_number_filter" class="mr-2">Contract Number:</label>
+      <input type="text" name="contract_number_filter" class="form-control" value="{{ request.GET.contract_number_filter }}">
+    </div>
+    <div class="form-group">
+      <label for="vendor_code_filter" class="mr-2">Vendor Code:</label>
+      <input type="text" name="vendor_code_filter" class="form-control" value="{{ request.GET.vendor_code_filter }}">
+    </div>
+    <button type="submit" class="btn btn-primary ml-2">Filter</button>
+  </form>
+  
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Company Code</th>
+        <th>Contract Number</th>
+        <th>Vendor Code</th>
+        <th>Vendor Name</th>
+        <th>Certificate Number</th>
+        <th>Rate</th>
+        <th>Amount</th>
+        <th>Consumed</th>
+        <th>Balance</th>
+        <!-- Add other headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for tax_order in tax_orders %}
+        <tr>
+          <td><a href="{% url 'tax_order_detail' tax_order.id %}">{{ tax_order.id }}</a></td>
+          <td>{{ tax_order.company_code }}</td>
+          <td>{{ tax_order.contract_number }}</td>
+          <td>{{ tax_order.vendor_code }}</td>
+          <td>{{ tax_order.vendor_name }}</td>
+          <td><a href="{% url 'tax_order_detail' tax_order.id %}">{{ tax_order.certificate_number }}</a></td>
+          <td>{{ tax_order.tax_rate }}</td>
+          <td>{{ tax_order.certificate_amount }}</td>
+          <td>{{ tax_order.consumed }}</td>
+          <td>{{ tax_order.balance }}</td>
+          <!-- Add other fields as needed -->
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- taxorders/templates/taxorders/enter_consumption.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Enter Consumption</h2>
+  <p>Consuming for Tax Order: {{ tax_order.certificate_number }}</p>
+  <form method="post" action="{% url 'enter_consumption' tax_order.id %}">
+    {% csrf_token %}
+    
+    <label for="consumption_amount">Document Number:</label>
+    <input type="number" name="document_number" step="0.01" required>
+    <label for="consumption_amount">Consumption Amount:</label>
+    <input type="number" name="consumption_amount" step="0.01" required>
+    <br>
+
+    <button type="submit">Enter Consumption</button>
+  </form>
+{% endblock %}

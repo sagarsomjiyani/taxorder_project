@@ -1,0 +1,25 @@
+<!-- taxorders/templates/taxorders/tax_order_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Tax Order Detail</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Company Code: {{ tax_order.company_code }}</p>
+        <p>Contract Number: {{ tax_order.contract_number }}</p>
+        <p>Vendor Code: {{ tax_order.vendor_code }}</p>
+        <p>Vendor Name: {{ tax_order.vendor_name }}</p>
+        <!-- Add other fields as needed -->
+        <p>Certificate Amount: {{ tax_order.certificate_amount }}</p>
+        <p>TDS Section Code: {{ tax_order.tds_section_code }}</p>
+        <p>Tax Order Section: {{ tax_order.tax_order_section }}</p>
+        <p>Tax Rate: {{ tax_order.tax_rate }}%</p>
+        <p>Consumed: {{ tax_order.consumed }}</p>
+        <p>Balance: {{ tax_order.balance }}</p>
+      </div>
+    </div>
+    
+    <a href="{% url 'enter_consumption' tax_order.id %}" class="btn btn-primary mt-2">Enter Consumption</a>
+  </div>
+{% endblock %}
