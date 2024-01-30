@@ -6,8 +6,16 @@
   
   <form method="get" action="{% url 'tax_order_list' %}" class="form-inline mb-4">
     <div class="form-group">
+      <label for="fiscalyear_filter" class="mr-2">Fiscal Year:</label>
+      <input type="text" name="fiscalyear_filter" class="form-control" value="{{ request.GET.fiscalyear_filter }}">
+    </div>
+    <div class="form-group">
       <label for="company_code_filter" class="mr-2">Company Code:</label>
       <input type="text" name="company_code_filter" class="form-control" value="{{ request.GET.company_code_filter }}">
+    </div>
+    <div class="form-group">
+      <label for="sectioncode_filter" class="mr-2">Section Code:</label>
+      <input type="text" name="sectioncode_filter" class="form-control" value="{{ request.GET.sectioncode_filter }}">
     </div>
     <div class="form-group">
       <label for="contract_number_filter" class="mr-2">Contract Number:</label>
@@ -17,6 +25,10 @@
       <label for="vendor_code_filter" class="mr-2">Vendor Code:</label>
       <input type="text" name="vendor_code_filter" class="form-control" value="{{ request.GET.vendor_code_filter }}">
     </div>
+    <div class="form-group">
+      <label for="vendor_name_filter" class="mr-2">Vendor Name:</label>
+      <input type="text" name="vendor_name_filter" class="form-control" value="{{ request.GET.vendor_name_filter }}">
+    </div>
     <button type="submit" class="btn btn-primary ml-2">Filter</button>
   </form>
   
@@ -24,11 +36,13 @@
     <thead class="thead-dark">
       <tr>
         <th>ID</th>
+        <th>Fiscal Year</th>
         <th>Company Code</th>
         <th>Contract Number</th>
         <th>Vendor Code</th>
         <th>Vendor Name</th>
         <th>Certificate Number</th>
+        <th>Section Code</th>
         <th>Rate</th>
         <th>Amount</th>
         <th>Consumed</th>
@@ -39,12 +53,14 @@
     <tbody>
       {% for tax_order in tax_orders %}
         <tr>
-          <td><a href="{% url 'tax_order_detail' tax_order.id %}">{{ tax_order.id }}</a></td>
+          <td>{{ tax_order.id }}</td>
+          <td>{{ tax_order.fiscalyear }}</td>
           <td>{{ tax_order.company_code }}</td>
           <td>{{ tax_order.contract_number }}</td>
           <td>{{ tax_order.vendor_code }}</td>
           <td>{{ tax_order.vendor_name }}</td>
           <td><a href="{% url 'tax_order_detail' tax_order.id %}">{{ tax_order.certificate_number }}</a></td>
+          <td>{{ tax_order.sectioncode }}</td>
           <td>{{ tax_order.tax_rate }}</td>
           <td> &#8377; {{ tax_order.certificate_amount }}</td>
           <td>&#8377; {{ tax_order.consumed }}</td>

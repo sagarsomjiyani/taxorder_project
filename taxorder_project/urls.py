@@ -20,6 +20,6 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),  # Add this line
-    path('taxorders/', include('taxorders.urls')),
+    path('', include('taxorders.urls')),
     # Add other URLs as needed
 ]

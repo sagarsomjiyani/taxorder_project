@@ -9,11 +9,16 @@ def tax_order_list(request):
     company_code_filter = request.GET.get('company_code_filter', '')
     contract_number_filter = request.GET.get('contract_number_filter', '')
     vendor_code_filter = request.GET.get('vendor_code_filter', '')
-
+    vendor_name_filter = request.GET.get('vendor_name_filter', '')
+    fiscalyear_filter = request.GET.get('fiscalyear_filter', '')
+    sectioncode_filter = request.GET.get('sectioncode_filter', '')
     tax_orders = TaxOrder.objects.filter(
+        fiscalyear__icontains=fiscalyear_filter,
         company_code__icontains=company_code_filter,
         contract_number__icontains=contract_number_filter,
-        vendor_code__icontains=vendor_code_filter
+        vendor_code__icontains=vendor_code_filter,
+        vendor_name__icontains=vendor_name_filter,
+        sectioncode__icontains=sectioncode_filter
     )
 
     return render(request, 'taxorders/tax_order_list.html', {
@@ -21,6 +26,10 @@ def tax_order_list(request):
         'company_code_filter': company_code_filter,
         'contract_number_filter': contract_number_filter,
         'vendor_code_filter': vendor_code_filter,
+        'vendor_name_filter': vendor_name_filter,
+        'sectioncode_filter': sectioncode_filter,
+        'fiscalyear_filter': fiscalyear_filter,
+
     })
 
 @login_required

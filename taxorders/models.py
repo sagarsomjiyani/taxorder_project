@@ -15,6 +15,8 @@ class TaxOrder(models.Model):
     tax_rate = models.DecimalField(max_digits=5, decimal_places=2)
     consumed = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     balance = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    sectioncode = models.CharField(max_length=3,default="CP")
+    fiscalyear =models.IntegerField(default=2023, max_length=4)
 
 class CertificateConsumption(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
