@@ -11,12 +11,12 @@
         <p>Vendor Code: {{ tax_order.vendor_code }}</p>
         <p>Vendor Name: {{ tax_order.vendor_name }}</p>
         <!-- Add other fields as needed -->
-        <p>Certificate Amount: {{ tax_order.certificate_amount }}</p>
+        <p>Certificate Amount: &#8377; {{ tax_order.certificate_amount }}</p>
         <p>TDS Section Code: {{ tax_order.tds_section_code }}</p>
         <p>Tax Order Section: {{ tax_order.tax_order_section }}</p>
         <p>Tax Rate: {{ tax_order.tax_rate }}%</p>
-        <p>Consumed: {{ tax_order.consumed }}</p>
-        <p>Balance: {{ tax_order.balance }}</p>
+        <p>Consumed: &#8377; {{ tax_order.consumed }}</p>
+        <p>Balance: &#8377; {{ tax_order.balance }}</p>
       </div>
       <div class="col-md-6">
         <table class="table">
@@ -33,7 +33,7 @@
               <tr>
                 <td>{{ tax_order_con.user }}</td>
                 <td>{{ tax_order_con.document_number }}</td>
-                <td>{{ tax_order_con.consumption_amount }}</td>
+                <td>&#8377; {{ tax_order_con.consumption_amount }}</td>
                 <!-- Add other fields as needed -->
               </tr>
             {% endfor %}

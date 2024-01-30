@@ -59,5 +59,9 @@ def enter_consumption(request, tax_order_id):
 @login_required
 def tax_order_detail(request, tax_order_id):
     tax_order = get_object_or_404(TaxOrder, pk=tax_order_id)
-    tax_order_cons = get_list_or_404(CertificateConsumption, tax_order=tax_order.id)
-    return render(request, 'taxorders/tax_order_detail.html', {'tax_order': tax_order,'tax_order_cons': tax_order_cons})
+    tax_order_cons = list(CertificateConsumption.objects.filter(tax_order=tax_order.id))
+    if tax_order_cons != "":
+        tax_order_consd = tax_order_cons
+    else:
+        tax_order_consd = ""
+    return render(request, 'taxorders/tax_order_detail.html', {'tax_order': tax_order,'tax_order_cons': tax_order_consd})

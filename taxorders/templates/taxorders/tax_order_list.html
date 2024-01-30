@@ -46,9 +46,9 @@
           <td>{{ tax_order.vendor_name }}</td>
           <td><a href="{% url 'tax_order_detail' tax_order.id %}">{{ tax_order.certificate_number }}</a></td>
           <td>{{ tax_order.tax_rate }}</td>
-          <td>{{ tax_order.certificate_amount }}</td>
-          <td>{{ tax_order.consumed }}</td>
-          <td>{{ tax_order.balance }}</td>
+          <td> &#8377; {{ tax_order.certificate_amount }}</td>
+          <td>&#8377; {{ tax_order.consumed }}</td>
+          <td>&#8377; {{ tax_order.balance }}</td>
           <!-- Add other fields as needed -->
         </tr>
       {% endfor %}
