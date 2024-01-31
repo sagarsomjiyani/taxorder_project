@@ -1,0 +1,62 @@
+<!-- taxorders/templates/taxorders/tax_order_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="mt-4">Tax Order List</h2>
+  <form method="get" action="{% url 'contract_details_list' %}" class="form-inline mb-4">
+    <div class="form-group">
+    <div class="form-group">
+      <label for="ola_number_filter" class="mr-2">OLA Number:</label>
+      <input type="text" name="ola_number_filter" class="form-control" value="{{ request.GET.ola_number_filter }}">
+    </div>
+    <div class="form-group">
+      <label for="vendor_code_filter" class="mr-2">Vendor Code:</label>
+      <input type="text" name="vendor_code_filter" class="form-control" value="{{ request.GET.vendor_code_filter }}">
+    </div>
+    <div class="form-group">
+      <label for="payment_currency_filter" class="mr-2">Currency:</label>
+      <input type="text" name="payment_currency_filter" class="form-control" value="{{ request.GET.payment_currency_filter }}">
+    </div>
+    <button type="submit" class="btn btn-primary ml-2">Filter</button>
+  </form>
+  
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>OLA Number</th>
+        <th>Vendor Code</th>
+        <th>Vendor Name</th>
+        <th>Vendor Address</th>
+        <th>Currency</th>
+        <th>Bank</th>
+        <th>SWIFT Code</th>
+        <th>IBAN</th>
+        <th>Whether Inter Bank?</th>
+        <th>Intermediary Bank</th>
+        <th>Int SWIFT</th>
+        <th>Int IBANK</th>
+        <!-- Add other headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for contract in contracts %}
+        <tr>
+    
+          <td>{{ contract.ola_number }}</td>
+          <td>{{ contract.vendor_code }}</td>
+          <td>{{ contract.vendor_name }}</td>
+          <td>{{ contract.vendor_address }}</td>
+          <td>{{ contract.payment_currency }}</td>
+          <td> {{ contract.payment_bank }}</td>
+          <td>{{ contract.payment_swift }}</td>
+          <td>{{ contract.payment_iban }}</td>
+          <td>{{ contract.payment_inter }}</td>
+          <td>{{ contract.payment_ibank }}</td>
+          <td>{{ contract.payment_iswift }}</td>
+          <td>{{ contract.payment_iiban }}</td>
+          <!-- Add other fields as needed -->
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

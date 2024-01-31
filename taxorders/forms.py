@@ -1,6 +1,6 @@
 # taxorders/forms.py
 from django import forms
-from .models import TaxOrder, CertificateConsumption
+from .models import TaxOrder, CertificateConsumption, ContractMaster
 
 class CertificateForm(forms.ModelForm):
     class Meta:
@@ -10,4 +10,9 @@ class CertificateForm(forms.ModelForm):
 class ConsumptionForm(forms.ModelForm):
     class Meta:
         model = CertificateConsumption
+        fields = '__all__' 
+
+class ContractForm(forms.ModelForm):
+    class Meta:
+        model = ContractMaster
         fields = '__all__' 

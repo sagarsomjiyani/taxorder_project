@@ -1,8 +1,8 @@
 # taxorders/views.py
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
-from .models import TaxOrder, CertificateConsumption
-from .forms import CertificateForm, ConsumptionForm
+from .models import TaxOrder, CertificateConsumption, ContractMaster
+from .forms import CertificateForm, ConsumptionForm, ContractForm
 
 @login_required
 def tax_order_list(request):
@@ -74,3 +74,40 @@ def tax_order_detail(request, tax_order_id):
     else:
         tax_order_consd = ""
     return render(request, 'taxorders/tax_order_detail.html', {'tax_order': tax_order,'tax_order_cons': tax_order_consd})
+
+@login_required
+def add_contract(request):
+    if request.method == 'POST':
+        form = ContractForm(request.POST)
+        if form.is_valid():
+            contract = form.save(commit=False)
+            contract.user = request.user
+            contract.save()
+            return redirect('tax_order_list')
+    else:
+        form = ContractForm()
+
+    return render(request, 'taxorders/add_contract.html', {'form': form})
+
+@login_required
+def contract_details_list(request):
+    ola_number_filter = request.GET.get('ola_number_filter', '')
+    vendor_code_filter = request.GET.get('vendor_code_filter', '')
+    payment_currency_filter = request.GET.get('payment_currency_filter', '')
+    contracts = ContractMaster.objects.filter(
+        ola_number__icontains=ola_number_filter,
+        vendor_code__icontains=vendor_code_filter,
+        payment_currency__icontains=payment_currency_filter
+    )
+    if contracts != "":
+        contracts = contracts
+    else:
+        contracts = ""
+
+    return render(request, 'taxorders/contract_details_list.html', {
+        'contracts': contracts,
+        'ola_number_filter': ola_number_filter,
+        'payment_currency_filter': payment_currency_filter,
+        'vendor_code_filter': vendor_code_filter,
+
+    })
